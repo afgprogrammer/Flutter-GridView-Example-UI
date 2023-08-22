@@ -15,16 +15,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  final List<String> _listItem = [
-    'assets/images/two.jpg',
-    'assets/images/three.jpg',
-    'assets/images/four.jpg',
-    'assets/images/five.jpg',
-    'assets/images/one.jpg',
-    'assets/images/two.jpg',
-    'assets/images/three.jpg',
-    'assets/images/four.jpg',
-    'assets/images/five.jpg',
+  final List<Map<String, dynamic>> _listItem = [
+    {"image": 'assets/images/two.jpg', "isSaved": false},
+    {"image": 'assets/images/three.jpg', "isSaved": false},
+    {"image": 'assets/images/four.jpg', "isSaved": true},
+    {"image": 'assets/images/five.jpg', "isSaved": true},
+    {"image": 'assets/images/one.jpg', "isSaved": false},
+    {"image": 'assets/images/two.jpg', "isSaved": false},
+    {"image": 'assets/images/three.jpg', "isSaved": false},
+    {"image": 'assets/images/four.jpg', "isSaved": false},
+    {"image": 'assets/images/five.jpg', "isSaved": false},
   ];
 
   @override
@@ -109,20 +109,47 @@ class _HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image: DecorationImage(
-                          image: AssetImage(item),
+                          image: AssetImage(item["image"]),
                           fit: BoxFit.cover
                         )
                       ),
                       child: Transform.translate(
-                        offset: Offset(50, -50),
+                        offset: Offset(55, -58),
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 65, vertical: 63),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white
+                          width: 30,
+                          // height: 30,
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(),
+                          child: Center(
+                            child: MaterialButton(
+                              onPressed: () {
+                                setState(() {
+                                  item["isSaved"] = !item["isSaved"];
+                                  
+                                });
+                              },
+                              color: Colors.white,
+                              height: 35,
+                              minWidth: 40,
+                              padding: EdgeInsets.all(0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)
+                              ),
+                              child: Icon(item["isSaved"] ? Icons.bookmark : Icons.bookmark_border, size: 22, color: item["isSaved"] ? Colors.yellow[700] : Colors.black),
+                            ),
                           ),
-                          child: Icon(Icons.bookmark_border, size: 15,),
                         ),
+                        // child: InkWell(
+                        //   onLongPress: () {},
+                        //   child: Container(
+                        //     margin: EdgeInsets.symmetric(horizontal:70, vertical: 71),
+                        //     decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(8),
+                        //       color: Colors.white
+                        //     ),
+                        //     child: Icon(Icons.bookmark_border, size: 22,),
+                        //   ),
+                        // ),
                       ),
                     ),
                   )).toList(),
